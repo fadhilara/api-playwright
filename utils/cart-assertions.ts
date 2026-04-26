@@ -28,26 +28,23 @@ export function assertCartTotals(cart: Cart) {
     const expectedDiscounted =
       rawTotal * (1 - item.discountPercentage / 100);
 
-    // 🔹 Item-level validation
-    expect(item.total, 'Mismatch in item.total')
+    expect(item.total, 'Validate in item.total')
       .toBeCloseTo(rawTotal, 2);
 
-    expect(item.discountedTotal, 'Mismatch in item.discountedTotal')
+    expect(item.discountedTotal, 'Validate in item.discountedTotal')
       .toBeCloseTo(expectedDiscounted, 2);
 
-    // 🔹 Accumulate
     calculatedTotal += rawTotal;
     sumOfItemTotals += item.total;
     sumOfDiscountedTotals += item.discountedTotal;
   }
 
-  // 🔹 Cart-level validation
-  expect(cart.total, 'Mismatch in cart.total (raw calculation)')
+  expect(cart.total, 'Validate in cart.total (raw calculation)')
     .toBeCloseTo(calculatedTotal, 2);
 
-  expect(cart.total, 'Mismatch in cart.total (sum of item.total)')
+  expect(cart.total, 'Validate in cart.total (sum of item.total)')
     .toBeCloseTo(sumOfItemTotals, 2);
 
-  expect(cart.discountedTotal, 'Mismatch in cart.discountedTotal')
+  expect(cart.discountedTotal, 'Validate in cart.discountedTotal')
     .toBeCloseTo(sumOfDiscountedTotals, 2);
 }
